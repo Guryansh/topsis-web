@@ -1,0 +1,9 @@
+[type=checkbox]:checked {
+    background-repeat: no-repeat;
+    background-image: url(../images/check-arrow.svg);
+    background-size: .9rem .9rem;
+    background-position: 50%
+}
+[type=checkbox].arrow-none:checked, [type=radio].arrow-none:checked {
+    background-repeat: no-repeat
+}

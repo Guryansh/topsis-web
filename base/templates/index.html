@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="light scroll-smooth group" data-layout="vertical" data-sidebar="light" data-sidebar-size="lg"
+      data-mode="light" data-topbar="light" data-skin="default" data-navbar="sticky" data-content="fluid" dir="ltr">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Guryansh -TOPSIS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta content="Guryansh -TOPSIS" name="description">
+    <meta content="Guryansh" name="author">
+    <!-- App favicon -->
+{#    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">#}
+    <!-- Layout config Js -->
+    <script src="{% static 'assets/js/layout.js' %}"></script>
+    <!-- Icons CSS -->
+
+    <!-- StarCode CSS -->
+
+
+    <link rel="stylesheet" href="{% static 'assets/css/starcode2.css' %}">
+</head>
+<body class="flex items-center justify-center min-h-screen py-16 bg-cover bg-auth-pattern dark:bg-auth-pattern-dark font-public">
+<div class="mb-0 border-none xl:w-2/3 card bg-white/70 dark:bg-zink-500/70 mx-5 shadow-slate-100 rounded-xl">
+    <div class="grid grid-cols-1 gap-0 lg:grid-cols-12">
+        <div class="lg:col-span-12">
+            <div class="!px-10 !py-12 card-body mt-auto">
+                <div class="">
+                    <div class="mt-8 text-center">
+                    <h4 class="mb-1 text-custom-500 dark:text-custom-500">Topsis Analysis By Guryansh</h4>
+                    <p class="text-slate-500 dark:text-zink-200">Fill the details below to receive csv result</p>
+                </div>
+                    <div class="mt-5 tab-content">
+                        <div class="block tab-pane">
+                            <form class="mt-10" method="post" action="{% url 'home' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="grid grid-cols-4 gap-4 md:grid-cols-8">
+                                    <div class="col-span-8">
+                                        <label for="inpInput" class="inline-block mb-2 text-base font-medium">Input File
+                                            <span class="text-red-500">*</span></label>
+                                        <input type="file" id="inpInput" name="input_file"
+                                               class="cursor-pointer form-file border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500"
+                                               placeholder="Upload File" required="">
+                                        <div id="input_fileError" class="text-red-500"></div>
+                                    </div>
+                                    <div class="col-span-8">
+                                        <label for="weightsInput" class="inline-block mb-2 text-base font-medium">Weights
+                                            <span class="text-red-500">*</span></label>
+                                        <input type="text" id="weightsInput" name="weights"
+                                               class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                               placeholder="E.g. .25,.25,.25,.25" required="">
+                                        <div id="weightsError" class="text-red-500"></div>
+                                    </div>
+                                    <div class="col-span-8">
+                                        <label for="impactsInput" class="inline-block mb-2 text-base font-medium">Impacts
+                                            <span class="text-red-500">*</span></label>
+                                        <input type="text" id="impactsInput" name="impacts"
+                                               class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                               placeholder="E.g. +,+,-" required="">
+                                        <div id="passwordError" class="text-red-500"></div>
+                                    </div>
+                                    <div class="col-span-8">
+                                        <label for="emailAddressInput" class="inline-block mb-2 text-base font-medium">Email
+                                            Address <span class="text-red-500">*</span></label>
+                                        <input type="email" id="emailAddressInput" name="email"
+                                               class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                               placeholder="Email address" required="">
+                                        <div id="emailError" class="text-red-500"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-10">
+                                    <button type="submit"
+                                            class="w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'assets/libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+<script src="{% static 'assets/libs/@popperjs/core/umd/popper.min.js' %}"></script>
+<script src="{% static 'assets/libs/tippy.js/tippy-bundle.umd.min.js' %}"></script>
+<script src="{% static 'assets/libs/simplebar/simplebar.min.js' %}"></script>
+<script src="{% static 'assets/libs/prismjs/prism.js' %}"></script>
+<script src="{% static 'assets/libs/lucide/umd/lucide.js' %}"></script>
+<script src="{% static 'assets/js/starcode.bundle.js' %}"></script>
+</body>
+
+</html>
+
