@@ -1,5 +1,5 @@
 from django.core.mail import EmailMultiAlternatives
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 import numpy as np
 import io
@@ -15,21 +15,16 @@ def home(request):
             impacts = request.POST.get('impacts')
             email = request.POST.get('email')
 
-            # Save the uploaded file to a temporary location
             input_file_name = default_storage.save('input_file.csv', input_file)
             input_file_path = default_storage.path(input_file_name)
 
-            # Read the CSV file into a list of dictionaries
             data = list(csv.DictReader(open(input_file_path)))
 
-            # Extract numeric data, excluding the first column (assumed to be text)
             data_values = np.array([list(map(float, list(row.values())[1:])) for row in data])
 
-            # Validate the number of columns
             if data_values.shape[1] < 3:
                 raise ValueError("Input file must contain three or more columns.")
 
-            # Validate weights and impacts
             weight = list(map(float, weights.split(',')))
             cost = impacts.split(',')
 
@@ -40,16 +35,13 @@ def home(request):
             if not all(c in ["+", "-"] for c in cost):
                 raise ValueError("Impacts must be either '+' (positive) or '-' (negative).")
 
-            # Normalize the data
             normsqrt = np.sqrt((data_values ** 2).sum(axis=0))
             if any(normsqrt == 0):
                 raise ValueError("One or more columns have zero variance, leading to division by zero during normalization.")
             normalised_data = data_values / normsqrt
 
-            # Apply weights
             after_weight_data = normalised_data * weight
 
-            # Determine ideal and anti-ideal solutions
             vpos = []
             vneg = []
 
@@ -72,18 +64,17 @@ def home(request):
             scores = sneg / (spos + sneg)
             for i, row in enumerate(data):
                 row['Score'] = scores[i]
-            data = sorted(data, key=lambda x: x['Score'], reverse=True)
-            for i, row in enumerate(data):
-                row['Rank'] = i + 1
 
-            # Convert the result to a CSV
+            ranks = np.argsort(-scores) + 1
+            for i, row in enumerate(data):
+                row['Rank'] = ranks[i]
+
             result_csv = io.StringIO()
             writer = csv.DictWriter(result_csv, fieldnames=data[0].keys())
             writer.writeheader()
             writer.writerows(data)
             result_csv.seek(0)
 
-            # Send the email with the CSV attachment
             email_message = EmailMultiAlternatives(
                 'TOPSIS Analysis Results',
                 "Please find the attached CSV file with the TOPSIS analysis results.",
@@ -100,5 +91,7 @@ def home(request):
             context['error'] = f"ValueError: {ve}"
         except Exception as e:
             context['error'] = f"An unexpected error occurred: {e}"
+
+        return redirect('home')
 
     return render(request, "index.html", context)
