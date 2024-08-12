@@ -1,4 +1,3 @@
-from django.core.mail import EmailMessage
 from django.shortcuts import render
 from django.conf import settings
 from django.core.mail import send_mail
@@ -26,8 +25,8 @@ def home(request):
 
             data = pd.read_csv(input_file_path)#csv.DictReader(input_file.read().decode('utf-8').splitlines())
 
-            if data.shape[1] < 3:
-                raise ValueError("Input file must contain three or more columns.")
+            # if data.shape[1] < 3:
+            #     raise ValueError("Input file must contain three or more columns.")
 
             data_values = data.iloc[:, 1:]
             # if not all(data_values.map(np.isreal).all()):
