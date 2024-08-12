@@ -133,7 +133,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # APPLICATION_EMAIL = 'gsingla2_be22@thapar.edu'
 
 EMAIL_HOST = 'smtp.hostinger.com'  # Replace with your SMTP server
-EMAIL_PORT = 587  # Common port for TLS
+EMAIL_PORT = 465  # Common port for TLS
 EMAIL_USE_TLS = True  # Enable TLS
 EMAIL_HOST_USER = 'guryansh@notatmrp.com'  # Your email address
 EMAIL_HOST_PASSWORD = 'Guryansh@123'  # Your email password
