@@ -125,12 +125,19 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # SMTP Configuration
-EMAIL_HOST = 'smtp.gmail.com'  # Replace with your SMTP server
+# EMAIL_HOST = 'smtp.gmail.com'  # Replace with your SMTP server
+# EMAIL_PORT = 587  # Common port for TLS
+# EMAIL_USE_TLS = True  # Enable TLS
+# EMAIL_HOST_USER = 'gsingla2_be22@thapar.edu'  # Your email address
+# EMAIL_HOST_PASSWORD = 'itbujdaijpsaswhr'  # Your email password
+# APPLICATION_EMAIL = 'gsingla2_be22@thapar.edu'
+
+EMAIL_HOST = 'smtp.hostinger.com'  # Replace with your SMTP server
 EMAIL_PORT = 587  # Common port for TLS
 EMAIL_USE_TLS = True  # Enable TLS
-EMAIL_HOST_USER = 'gsingla2_be22@thapar.edu'  # Your email address
-EMAIL_HOST_PASSWORD = 'itbujdaijpsaswhr'  # Your email password
-APPLICATION_EMAIL = 'gsingla2_be22@thapar.edu'
+EMAIL_HOST_USER = 'guryansh@notatmrp.com'  # Your email address
+EMAIL_HOST_PASSWORD = 'Guryansh@123'  # Your email password
+APPLICATION_EMAIL = 'guryansh@notatmrp.com'
 # Default From Email
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
