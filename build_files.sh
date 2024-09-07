@@ -6,8 +6,9 @@ source myenv/bin/activate
 pip install -r requirements.txt
 
 # Run Django collectstatic to gather static files
-python manage.py collectstatic
-
+python manage.py collectstatic --no-post-process
+python manage.py makemigrations
+python manage.py migrate
 # Move the collected static files to the expected directory
 mkdir -p staticfiles_build
-mv static staticfiles_build/static
+cp -r static staticfiles_build/static
